@@ -16,3 +16,14 @@ body {
     background-color: rgb(197, 197, 245);
     border-radius: 8px;
 }
+
+.manipulateCategoryForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#newCategoryName {
+    border: none;
+    outline: none;
+    background-color: rgb(197, 197, 245) ;
+}

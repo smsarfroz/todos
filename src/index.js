@@ -14,6 +14,9 @@ const addCategoryButton = document.querySelector(".newCategory");
 
 addCategoryButton.addEventListener('click', () => {
 
+    const buttonSection = document.querySelector(".buttonSection");
+
+    buttonSection.innerHTML = "";
 });
 
 export { ToDo };
