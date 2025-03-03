@@ -14,9 +14,13 @@ const addCategoryButton = document.querySelector(".newCategory");
 
 addCategoryButton.addEventListener('click', () => {
 
-    const buttonSection = document.querySelector(".buttonSection");
+    const newCategoryButton = document.querySelector(".newCategory");
+    const categoryForm = document.querySelector(".categoryForm");
+    const manipulateButtons = document.querySelector(".manipulateCategoryForm");
 
-    buttonSection.innerHTML = "";
+    newCategoryButton.style.display = "none";
+    categoryForm.style.display = "";
+    manipulateButtons.style.display = "";
 });
 
 export { ToDo };
