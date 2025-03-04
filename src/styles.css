@@ -27,3 +27,18 @@ body {
     outline: none;
     background-color: rgb(197, 197, 245) ;
 }
+
+#title {
+    border: none;
+    outline: none;
+}
+
+#description {
+    border: none;
+    outline: none;
+}
+
+#priority {
+    border: none;
+    background-color: white;
+}
