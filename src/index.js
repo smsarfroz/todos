@@ -72,14 +72,14 @@ saveTaskButton.addEventListener('click', () => {
     const date = document.querySelector("#date").value;
     const priority = document.querySelector("#priority").value;
 
-    // let newTodo = new addTodo(title, description, date, priority);
-    // newTodo.insertTasktoView();  
-    // ToDo.push(newTodo);
+    let newTodo = new addTodo(title, description, date, priority);
+    newTodo.insertTasktoView();  
+    ToDo.push(newTodo);
 
 
-    const project = document.createElement("div");
-    project.textContent = title;
-    todos.appendChild(project);
+    // const project = document.createElement("div");
+    // project.textContent = title;
+    // todos.appendChild(project);
     taskForm.close();
 });
 

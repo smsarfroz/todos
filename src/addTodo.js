@@ -10,38 +10,23 @@ class addTodo {
         this.Priority = Priority;
     }
 
-    // insertTasktoView() {
-    //     this.todos = document.querySelector(".todos");
-        
-    //     this.title = document.querySelector("#title").value;
-    //     this.description = document.querySelector('#description').value;
-    //     this.date = document.querySelector("#date").value;
-    //     this.priority = document.querySelector("#priority").value;
+    insertTasktoView() {
+        this.todos = document.querySelector(".todos");
+        this.task = document.createElement("div");
+        this.task.innerHTML = `
+            <h1>${title}</h1>
+            <div class="${dropDescription}">
+                <p>${description}</p>
+                <div class="datePriority">
+                    <p>${date}</p>
+                    <p>${priority}</p>
+                </div>
+            </div>
+        `;
 
-    //     this.task = document.createElement("div");
-        
-    //     this.heading = document.createElement("h1");
-    //     this.heading.textContent = this.title; 
-    //     this.task.appendChild(this.heading);
-
-    //     this.descriptionDiv = document.createElement("div");
-    //     this.descriptionDetail = document.createElement("div");
-    //     this.descriptionDetail.textContent = this.description;
-    //     this.descriptionDiv.appendChild(this.descriptionDetail);
-
-    //     this.rightDescription = document.createElement("div");
-    //     this.dateDiv = document.createElement("div");
-    //     this.dateDiv.textContent = this.date; 
-    //     this.priorityDiv = document.createElement("div");
-    //     this.priorityDiv.textContent = this.priority;
-    //     this.rightDescription.appendChild(this.dateDiv);
-    //     this.rightDescription.appendChild(this.priorityDiv);
-
-    //     this.task.appendChild(this.descriptionDiv);
-    //     this.task.appendChild(this.rightDescription);
-
-    //     this.todos.appendChild(this.task);
-    // }
+        this.todos.appendChild(this.task);
+    }
 }
 
 export { addTodo };
+
