@@ -1,4 +1,3 @@
-import { NoEmitOnErrorsPlugin } from "webpack";
 import { Todo } from ".";
 
 class addTodo {
@@ -14,12 +13,12 @@ class addTodo {
         this.todos = document.querySelector(".todos");
         this.task = document.createElement("div");
         this.task.innerHTML = `
-            <h1>${title}</h1>
-            <div class="${dropDescription}">
-                <p>${description}</p>
+            <h3>${this.Title}</h3>
+            <div class="dropDescription">
+                <p>${this.Description}</p>
                 <div class="datePriority">
-                    <p>${date}</p>
-                    <p>${priority}</p>
+                    <p>${this.dueDate}</p>
+                    <p>${this.Priority}</p>
                 </div>
             </div>
         `;
