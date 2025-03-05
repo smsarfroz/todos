@@ -57,13 +57,41 @@ projects.forEach(project => {
     });
 });
 
+const taskForm = document.querySelector(".taskForm");
+const cancelTaskButton = document.querySelector(".cancelTask");
+const saveTaskButton = document.querySelector(".saveTask");
+
+cancelTaskButton.addEventListener('click', () => {
+    taskForm.close();
+});
+saveTaskButton.addEventListener('click', () => {
+    const todos = document.querySelector(".todos");
+
+    const title = document.querySelector("#title").value;
+    const description = document.querySelector('#description').value;
+    const date = document.querySelector("#date").value;
+    const priority = document.querySelector("#priority").value;
+
+    // let newTodo = new addTodo(title, description, date, priority);
+    // newTodo.insertTasktoView();  
+    // ToDo.push(newTodo);
+
+
+    const project = document.createElement("div");
+    project.textContent = title;
+    todos.appendChild(project);
+    taskForm.close();
+});
 
 const addnewTaskButton = document.querySelector(".newTasks");
 
 addnewTaskButton.addEventListener('click', () => {
-    console.log("new task button");
-    
-    const todos = document.querySelector(".todos");
+
+    document.querySelector("#title").value = "";
+    document.querySelector('#description').value = "";
+    document.querySelector("#date").value = "";
+    document.querySelector("#priority").value = "";
+    taskForm.show();
 
 });
 export { ToDo };
