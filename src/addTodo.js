@@ -2,11 +2,12 @@ import { Todo } from ".";
 
 class addTodo {
 
-    constructor(Title, Description, dueDate, Priority) {
+    constructor(Title, Description, dueDate, Priority, categoryName) {
         this.Title = Title;
         this.Description = Description;
         this.dueDate = dueDate;
         this.Priority = Priority;
+        this.Category = categoryName;
     }
 
     insertTasktoView() {
