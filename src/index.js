@@ -54,17 +54,14 @@ saveButton.addEventListener('click', () => {
 });
 
 
-const projects = document.querySelectorAll(".projectClass");
-console.log(projects);
+const projects = document.querySelector(".projects");
 let categoryName = "";
-projects.forEach(project => {
-    console.log("inside the loop of projects");
-    console.log(project);
-    project.addEventListener('click', () => {
-        console.log("a project pressed");
-        console.log(project);
-        console.log(project.textContent);
-        console.log(`project called ${project.textContent} selected.`);
+
+if(projects) {
+    console.log("here");
+    console.log(projects);
+    projects.addEventListener('click', (e) => {
+        const project = e.target;
         categoryName = project.textContent;
         const todos = document.querySelector(".todos");
         todos.innerHTML = "";
@@ -76,24 +73,24 @@ projects.forEach(project => {
                 if (todo.Category === project.textContent) {
                     const newTodo = document.createElement("div");
                     newTodo.innerHTML = `
-                    <h3>${todo.Title}</h3>
-                    <div class="dropDescription">
-                    <p>${todo.Description}</p>
-                        <div class="datePriority">
-                            <p>${todo.dueDate}</p>
-                            <p>${todo.Priority}</p>
+                        <h3>${todo.Title}</h3>
+                        <div class="dropDescription">
+                        <p>${todo.Description}</p>
+                            <div class="datePriority">
+                                <p>${todo.dueDate}</p>
+                                <p>${todo.Priority}</p>
+                            </div>
                         </div>
-                    </div>
-                `;
+                    `;
                     todos.appendChild(newTodo);
                 }
 
             });
         }
     });
-});
-
-
+}else {
+    console.log("projects is empty");
+}
 
 const taskForm = document.querySelector(".taskForm");
 const cancelTaskButton = document.querySelector(".cancelTask");
