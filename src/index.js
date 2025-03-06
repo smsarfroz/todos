@@ -1,13 +1,9 @@
 import "./styles.css";
 import deleteIcon from "./images/delete.svg";
+import editIcon from "./images/edit.svg";
 import { addProject } from "./addProject";
 import { addTodo } from "./addTodo";
 import { handleAllTask } from "./handleAllTask";
-
-// const image = document.createElement("img");
-// image.src = deleteIcon;
-
-// document.body.appendChild(image);
 
 let ToDo = [
 
@@ -157,5 +153,10 @@ addnewTaskButton.addEventListener('click', () => {
     document.querySelector("#priority").value = "";
     taskForm.show();
 
+});
+
+const deleteCat = document.querySelector(".deleteCat");
+deleteCat.addEventListener('click', () => {
+    console.log("delete icon clicked");
 });
 export { ToDo };
