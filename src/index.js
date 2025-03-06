@@ -2,6 +2,7 @@ import "./styles.css";
 import deleteIcon from "./images/delete.svg";
 import { addProject } from "./addProject";
 import { addTodo } from "./addTodo";
+import { handleAllTask } from "./handleAllTask";
 
 // const image = document.createElement("img");
 // image.src = deleteIcon;
@@ -61,7 +62,7 @@ saveButton.addEventListener('click', () => {
 
 const projects = document.querySelector(".projects");
 
-if(projects) {
+if (projects) {
     console.log("here");
     console.log(projects);
     projects.addEventListener('click', (e) => {
@@ -94,7 +95,7 @@ if(projects) {
             });
         }
     });
-}else {
+} else {
     console.log("projects is empty");
 }
 
@@ -131,9 +132,8 @@ saveTaskButton.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("executing load event listener");
     const categoryArrayString = localStorage.getItem("category");
-    if(categoryArrayString) {
+    if (categoryArrayString) {
         const categoryArray = JSON.parse(categoryArrayString);
         categoryArray.forEach(category => {
             const project = document.createElement("div");
@@ -141,7 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
             projects.appendChild(project);
         });
     }
+    const allTaskButton = document.querySelector(".allTasks");
+    allTaskButton.click();
 });
+
+handleAllTask();
 
 const addnewTaskButton = document.querySelector(".newTasks");
 
