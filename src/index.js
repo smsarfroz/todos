@@ -130,6 +130,19 @@ saveTaskButton.addEventListener('click', () => {
     taskForm.close();
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("executing load event listener");
+    const categoryArrayString = localStorage.getItem("category");
+    if(categoryArrayString) {
+        const categoryArray = JSON.parse(categoryArrayString);
+        categoryArray.forEach(category => {
+            const project = document.createElement("div");
+            project.textContent = category;
+            projects.appendChild(project);
+        });
+    }
+});
+
 const addnewTaskButton = document.querySelector(".newTasks");
 
 addnewTaskButton.addEventListener('click', () => {
