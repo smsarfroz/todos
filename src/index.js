@@ -54,12 +54,18 @@ saveButton.addEventListener('click', () => {
 });
 
 
-const projects = document.querySelectorAll(".projects");
-
+const projects = document.querySelectorAll(".projectClass");
+console.log(projects);
+let categoryName = "";
 projects.forEach(project => {
+    console.log("inside the loop of projects");
+    console.log(project);
     project.addEventListener('click', () => {
-        console.log("a project clicked");
-
+        console.log("a project pressed");
+        console.log(project);
+        console.log(project.textContent);
+        console.log(`project called ${project.textContent} selected.`);
+        categoryName = project.textContent;
         const todos = document.querySelector(".todos");
         todos.innerHTML = "";
         const todoArrayString = localStorage.getItem("todos");
@@ -67,8 +73,9 @@ projects.forEach(project => {
             const todoArray = JSON.parse(todoArrayString);
 
             todoArray.forEach(todo => {
-                const newTodo = document.createElement("div");
-                newTodo.innerHTML = `
+                if (todo.Category === project.textContent) {
+                    const newTodo = document.createElement("div");
+                    newTodo.innerHTML = `
                     <h3>${todo.Title}</h3>
                     <div class="dropDescription">
                     <p>${todo.Description}</p>
@@ -78,11 +85,15 @@ projects.forEach(project => {
                         </div>
                     </div>
                 `;
-                
+                    todos.appendChild(newTodo);
+                }
+
             });
         }
     });
 });
+
+
 
 const taskForm = document.querySelector(".taskForm");
 const cancelTaskButton = document.querySelector(".cancelTask");
@@ -93,13 +104,13 @@ cancelTaskButton.addEventListener('click', () => {
 });
 saveTaskButton.addEventListener('click', () => {
     const todos = document.querySelector(".todos");
-    const categoryName = document.querySelector("#newCategoryName").value;
 
     const title = document.querySelector("#title").value;
     const description = document.querySelector('#description').value;
     const date = document.querySelector("#date").value;
     const priority = document.querySelector("#priority").value;
 
+    console.log(categoryName);
     let newTodo = new addTodo(title, description, date, priority, categoryName);
     newTodo.insertTasktoView();
     ToDo.push(newTodo);
