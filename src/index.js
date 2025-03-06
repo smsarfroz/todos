@@ -36,9 +36,11 @@ cancelButton.addEventListener('click', () => {
 
 const saveButton = document.querySelector(".save");
 
+let categoryName = "";
+
 saveButton.addEventListener('click', () => {
 
-    const categoryName = document.querySelector("#newCategoryName").value;
+    categoryName = document.querySelector("#newCategoryName").value;
     addProject(categoryName);
     document.querySelector("#newCategoryName").value = "";
 
@@ -48,6 +50,9 @@ saveButton.addEventListener('click', () => {
     const updatedCategoryArrayString = JSON.stringify(categoryArray);
     localStorage.setItem("category", updatedCategoryArrayString);
 
+    const todos = document.querySelector(".todos");
+    todos.innerHTML = "";
+
     newCategoryButton.style.display = "";
     categoryForm.style.display = "none";
     manipulateButtons.style.display = "none";
@@ -55,13 +60,14 @@ saveButton.addEventListener('click', () => {
 
 
 const projects = document.querySelector(".projects");
-let categoryName = "";
 
 if(projects) {
     console.log("here");
     console.log(projects);
     projects.addEventListener('click', (e) => {
         const project = e.target;
+        console.log(`${project} was selected`);
+        console.log(project);
         categoryName = project.textContent;
         const todos = document.querySelector(".todos");
         todos.innerHTML = "";
@@ -107,6 +113,7 @@ saveTaskButton.addEventListener('click', () => {
     const date = document.querySelector("#date").value;
     const priority = document.querySelector("#priority").value;
 
+    console.log("categoryName");
     console.log(categoryName);
     let newTodo = new addTodo(title, description, date, priority, categoryName);
     newTodo.insertTasktoView();
