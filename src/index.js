@@ -4,6 +4,7 @@ import editIcon from "./images/edit.svg";
 import { addProject } from "./addProject";
 import { addTodo } from "./addTodo";
 import { handleAllTask } from "./handleAllTask";
+import { saveCategoryNamefunction } from "./saveCategoryNameFunction";
 
 let ToDo = [
 
@@ -36,25 +37,15 @@ const saveButton = document.querySelector(".save");
 let categoryName = "";
 
 saveButton.addEventListener('click', () => {
-
-    categoryName = document.querySelector("#newCategoryName").value;
-    addProject(categoryName);
-    document.querySelector("#newCategoryName").value = "";
-
-    const categoryArrayString = localStorage.getItem("category");
-    const categoryArray = categoryArrayString ? JSON.parse(categoryArrayString) : [];
-    categoryArray.push(categoryName);
-    const updatedCategoryArrayString = JSON.stringify(categoryArray);
-    localStorage.setItem("category", updatedCategoryArrayString);
-
-    const todos = document.querySelector(".todos");
-    todos.innerHTML = "";
-
-    newCategoryButton.style.display = "";
-    categoryForm.style.display = "none";
-    manipulateButtons.style.display = "none";
+    saveCategoryNamefunction();
 });
-
+const categoryFormInput = document.querySelector(".categoryFormInput");
+categoryFormInput.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') {
+        e.preventDefault();
+        saveCategoryNamefunction();
+    }
+});
 
 const projects = document.querySelector(".projects");
 
@@ -67,7 +58,31 @@ if (projects) {
             console.log("it'a an icon");
 
             if(project.className === "editCat"){
-                //what do we do here ? 
+                console.log("edit icon is pressed"); 
+                const projectDiv = project.closest(".projectClass");
+                const category = projectDiv.querySelector(".categoryNameDiv h3");
+                console.log(category);
+                const categoryName = category.textContent;
+                category.remove();
+                const categoryNameDiv = projectDiv.querySelector(".categoryNameDiv");
+                categoryNameDiv.innerHTML = `
+                    <form class="editCatForm" action="#" method="post">
+                        <label for="editCategoryName"></label>
+                        <input type="text" id="editCategoryName" value="${categoryName}">
+                    </form>
+                `;
+
+                const EditCatForm = document.querySelector(".editCatForm");
+                const EditCatInput = document.querySelector("#editCategoryName");
+                EditCatForm.addEventListener('keypress', (e) => {
+                    if(e.key === 'Enter'){
+                        e.preventDefault();
+                        const newCategoryName = EditCatInput.value;
+                        categoryNameDiv.innerHTML = `
+                            <h3>${newCategoryName}</h3>
+                        `;
+                    }
+                });
             }else {
                 project.closest(".projectClass").remove();
 
