@@ -63,32 +63,58 @@ if (projects) {
     console.log(projects);
     projects.addEventListener('click', (e) => {
         const project = e.target;
-        console.log(`${project} was selected`);
-        console.log(project);
-        categoryName = project.textContent;
-        const todos = document.querySelector(".todos");
-        todos.innerHTML = "";
-        const todoArrayString = localStorage.getItem("todos");
-        if (todoArrayString) {
-            const todoArray = JSON.parse(todoArrayString);
+        if(project.className === "editCat" || project.className === "deleteCat") {
+            console.log("it'a an icon");
 
-            todoArray.forEach(todo => {
-                if (todo.Category === project.textContent) {
-                    const newTodo = document.createElement("div");
-                    newTodo.innerHTML = `
-                        <h3>${todo.Title}</h3>
-                        <div class="dropDescription">
-                        <p>${todo.Description}</p>
-                            <div class="datePriority">
-                                <p>${todo.dueDate}</p>
-                                <p>${todo.Priority}</p>
-                            </div>
-                        </div>
-                    `;
-                    todos.appendChild(newTodo);
+            if(project.className === "editCat"){
+                //what do we do here ? 
+            }else {
+                project.closest(".projectClass").remove();
+
+                const projectDiv = project.closest(".projectClass");
+                const categoryName = projectDiv.querySelector(".categoryNameDiv h3").textContent
+                const categoryArrayString = localStorage.getItem("category");
+                const categoryArray = JSON.parse(categoryArrayString);
+
+                for(let i =0; i<categoryArray.length; ++i) {
+                    console.log(i,categoryArray[i], categoryName, categoryName);
+                    if(categoryArray[i] === categoryName) {
+                        categoryArray.splice(i,1);
+                    }
                 }
+                const updatedCategoryArrayString = JSON.stringify(categoryArray);
+                localStorage.setItem("category", updatedCategoryArrayString);
+            }
+        }else{
+            console.log(project);
+            console.log(project.className);
 
-            });
+
+            categoryName = project.textContent;
+            const todos = document.querySelector(".todos");
+            todos.innerHTML = "";
+            const todoArrayString = localStorage.getItem("todos");
+            if (todoArrayString) {
+                const todoArray = JSON.parse(todoArrayString);
+
+                todoArray.forEach(todo => {
+                    if (todo.Category === project.textContent) {
+                        const newTodo = document.createElement("div");
+                        newTodo.innerHTML = `
+                            <h3>${todo.Title}</h3>
+                            <div class="dropDescription">
+                            <p>${todo.Description}</p>
+                                <div class="datePriority">
+                                    <p>${todo.dueDate}</p>
+                                    <p>${todo.Priority}</p>
+                                </div>
+                            </div>
+                        `;
+                        todos.appendChild(newTodo);
+                    }
+
+                });
+            }
         }
     });
 } else {
@@ -155,8 +181,4 @@ addnewTaskButton.addEventListener('click', () => {
 
 });
 
-const deleteCat = document.querySelector(".deleteCat");
-deleteCat.addEventListener('click', () => {
-    console.log("delete icon clicked");
-});
 export { ToDo };

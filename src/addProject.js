@@ -1,7 +1,7 @@
 import deleteIcon from "./images/delete.svg";
 import editIcon from "./images/edit.svg";
 
-const addProject = function(categoryName) {
+const addProject = function (categoryName) {
     const deleteCat = document.createElement("img");
     deleteCat.classList.add("deleteCat");
     deleteCat.src = deleteIcon;
@@ -21,9 +21,15 @@ const addProject = function(categoryName) {
         </div>
     `;
 
+    // const deleteCat = document.querySelector(".deleteCat");
+    // deleteCat.addEventListener('click', (e) => {
+    //     console.log("delete icon clicked");
+    //     e.stopPropagation();
+    // });
+
     projects.appendChild(newProject);
 }
 
 
-export {addProject} ;
+export { addProject };
 
