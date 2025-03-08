@@ -3,7 +3,7 @@ import dropdownIcon from "./images/dropdown.svg";
 import editIcon from "./images/edit.svg";
 import deleteIcon from "./images/delete.svg";
 
-
+const taskForm = document.querySelector(".taskForm"); 
 class addTodo {
 
     constructor(Title, Description, dueDate, Priority, categoryName) {
@@ -13,7 +13,7 @@ class addTodo {
         this.Priority = Priority;
         this.Category = categoryName;
     }
-
+    
     insertTasktoView() {
         this.todos = document.querySelector(".todos");
         this.task = document.createElement("div");
@@ -24,7 +24,7 @@ class addTodo {
                 <img class="editTodo" src="${editIcon}">
                 <img class="deleteTodo" src="${deleteIcon}">
             <div>
-            <div class="dropDescription">   
+            <div class="dropDescription" style="display:none;">   
                 <p>${this.Description}</p>
                 <div class="datePriority">
                     <p>${this.dueDate}</p>
@@ -51,9 +51,16 @@ class addTodo {
     }
 
     handleDropdown() {
-
+        const dropDescription = this.task.querySelector(".dropDescription");
+        if(dropDescription.style.display === "none"){
+            dropDescription.style.display = "";
+        }else{
+            dropDescription.style.display = "none";
+        }
     }
     handleEdit() {
+        
+        taskForm.showModal();
 
     }
     handleDelete() {
