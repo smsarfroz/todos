@@ -1,4 +1,8 @@
 import { Todo } from ".";
+import dropdownIcon from "./images/dropdown.svg";
+import editIcon from "./images/edit.svg";
+import deleteIcon from "./images/delete.svg";
+
 
 class addTodo {
 
@@ -15,7 +19,12 @@ class addTodo {
         this.task = document.createElement("div");
         this.task.innerHTML = `
             <h3>${this.Title}</h3>
-            <div class="dropDescription">
+            <div class ="todoIconDiv">
+                <img class="dropdownTodo" src="${dropdownIcon}">
+                <img class="editTodo" src="${editIcon}">
+                <img class="deleteTodo" src="${deleteIcon}">
+            <div>
+            <div class="dropDescription">   
                 <p>${this.Description}</p>
                 <div class="datePriority">
                     <p>${this.dueDate}</p>
@@ -24,7 +33,47 @@ class addTodo {
             </div>
         `;
 
+        this.dropdownIcon = this.task.querySelector(".dropdownTodo");
+        this.editIcon = this.task.querySelector(".editTodo");
+        this.deleteIcon = this.task.querySelector(".deleteTodo");
+
+        this.dropdownIcon.addEventListener('click', ()=> {
+            console.log("drop down clicked");
+            this.handleDropdown();
+        });
+        this.editIcon.addEventListener('click', ()=> {
+            this.handleEdit();
+        });
+        this.deleteIcon.addEventListener('click', ()=> {
+            this.handleDelete();
+        });
         this.todos.appendChild(this.task);
+    }
+
+    handleDropdown() {
+
+    }
+    handleEdit() {
+
+    }
+    handleDelete() {
+        this.task.remove();
+        const todoArrayString = localStorage.getItem("todos");
+        const todoArray = JSON.parse(todoArrayString);
+        for(let i = 0; i < todoArray.length; ++i) {
+            const currentObj = todoArray[i];
+            if (
+                currentObj.Title === this.Title && 
+                currentObj.Description === this.Description && 
+                currentObj.dueDate === this.dueDate && 
+                currentObj.Priority === this.Priority && 
+                currentObj.Category === this.Category
+            ) {
+                todoArray.splice(i, 1);
+            }
+        }
+        const updatedTodoArrayString = JSON.stringify(todoArray);
+        localStorage.setItem("todos", updatedTodoArrayString);
     }
 }
 

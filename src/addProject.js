@@ -21,12 +21,6 @@ const addProject = function (categoryName) {
         </div>
     `;
 
-    // const deleteCat = document.querySelector(".deleteCat");
-    // deleteCat.addEventListener('click', (e) => {
-    //     console.log("delete icon clicked");
-    //     e.stopPropagation();
-    // });
-
     projects.appendChild(newProject);
 }
 
