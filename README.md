@@ -1,7 +1,5 @@
 # todos
 
-Image credits 
+Image credits
 
 Image: Dan Dan / Delete 146 Vectors SVG / PD License.
-
-
