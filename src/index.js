@@ -6,6 +6,9 @@ import { addTodo } from "./addTodo";
 import { handleAllTask } from "./handleAllTask";
 import { saveCategoryNamefunction } from "./saveCategoryNameFunction.js";
 import { quartersInYear } from "date-fns/constants";
+import { saveTaskFunction } from "./saveTaskFunction.js";
+import { taskDialogue } from "./taskDialogue.js";
+import { addnewTaskButton } from "./addnewTaskButton.js";
 
 let ToDo = [];
 
@@ -51,6 +54,47 @@ if (projects) {
   console.log(projects);
   projects.addEventListener("click", (e) => {
     const project = e.target;
+    if (project.className !== "deleteCat") {
+      console.log("inside click on a category");
+      console.log(project);
+      console.log(project.className);
+
+      categoryName = project.textContent;
+      const todos = document.querySelector(".todos");
+      todos.innerHTML = "";
+      const todoArrayString = localStorage.getItem("todos");
+      console.log(todoArrayString);
+      if (todoArrayString) {
+        const todoArray = JSON.parse(todoArrayString);
+
+        console.log("inside check todoArrayString");
+        console.log(todoArray);
+        todoArray.forEach((todo) => {
+          console.log(todo);
+          console.log(`todo.Category = ${todo.Category}`);
+          console.log(`project.textContent = ${project.textContent}`);
+          console.log(todo.Category, project.textContent);
+          if (todo.Category === project.textContent) {
+            console.log(todo);
+            console.log(
+              (todo.Title,
+              todo.Description,
+              todo.dueDate,
+              todo.Priority,
+              todo.Category),
+            );
+            let newTodo = new addTodo(
+              todo.Title,
+              todo.Description,
+              todo.dueDate,
+              todo.Priority,
+            );
+            newTodo.insertTasktoView();
+          }
+        });
+      }
+    }
+
     if (project.className === "editCat" || project.className === "deleteCat") {
       console.log("it'a an icon");
 
@@ -99,83 +143,13 @@ if (projects) {
         const updatedCategoryArrayString = JSON.stringify(categoryArray);
         localStorage.setItem("category", updatedCategoryArrayString);
       }
-    } else {
-      console.log("inside click on a category");
-      console.log(project);
-      console.log(project.className);
-
-      categoryName = project.textContent;
-      const todos = document.querySelector(".todos");
-      todos.innerHTML = "";
-      const todoArrayString = localStorage.getItem("todos");
-      console.log(todoArrayString);
-      if (todoArrayString) {
-        const todoArray = JSON.parse(todoArrayString);
-
-        console.log("inside check todoArrayString");
-        console.log(todoArray);
-        todoArray.forEach((todo) => {
-          console.log(todo);
-          console.log(`todo.Category = ${todo.Category}`);
-          console.log(`project.textContent = ${project.textContent}`);
-          console.log(todo.Category, project.textContent);
-          if (todo.Category === project.textContent) {
-            console.log(todo);
-            console.log(
-              (todo.Title,
-              todo.Description,
-              todo.dueDate,
-              todo.Priority,
-              todo.Category),
-            );
-            let newTodo = new addTodo(
-              todo.Title,
-              todo.Description,
-              todo.dueDate,
-              todo.Priority,
-              todo.Category,
-            );
-            newTodo.insertTasktoView();
-          }
-        });
-      }
     }
   });
 } else {
   console.log("projects is empty");
 }
 
-const taskForm = document.querySelector(".taskForm");
-const cancelTaskButton = document.querySelector(".cancelTask");
-const saveTaskButton = document.querySelector(".saveTask");
-
-cancelTaskButton.addEventListener("click", () => {
-  taskForm.close();
-});
-saveTaskButton.addEventListener("click", () => {
-  const todos = document.querySelector(".todos");
-
-  const title = document.querySelector("#title").value;
-  const description = document.querySelector("#description").value;
-  const date = document.querySelector("#date").value;
-  const priority = document.querySelector("#priority").value;
-
-  console.log("categoryName");
-  console.log(categoryName);
-  let newTodo = new addTodo(title, description, date, priority, categoryName);
-  newTodo.insertTasktoView();
-  ToDo.push(newTodo);
-
-  const todoArrayString = localStorage.getItem("todos");
-  const todoArray = todoArrayString ? JSON.parse(todoArrayString) : [];
-  todoArray.push(newTodo);
-  const updatedTodoArrayString = JSON.stringify(todoArray);
-  localStorage.setItem("todos", updatedTodoArrayString);
-
-  console.log(ToDo);
-
-  taskForm.close();
-});
+taskDialogue();
 
 document.addEventListener("DOMContentLoaded", () => {
   const categoryArrayString = localStorage.getItem("category");
@@ -191,14 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 categoryName = handleAllTask();
 
-const addnewTaskButton = document.querySelector(".newTasks");
+addnewTaskButton();
 
-addnewTaskButton.addEventListener("click", () => {
-  document.querySelector("#title").value = "";
-  document.querySelector("#description").value = "";
-  document.querySelector("#date").value = "";
-  document.querySelector("#priority").value = "";
-  taskForm.show();
-});
-
-export { ToDo };
+export { ToDo, categoryName };

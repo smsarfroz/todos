@@ -2,10 +2,11 @@ import { Todo } from ".";
 import dropdownIcon from "./images/dropdown.svg";
 import editIcon from "./images/edit.svg";
 import deleteIcon from "./images/delete.svg";
+import { categoryName } from ".";
 
 const taskForm = document.querySelector(".taskForm");
 class addTodo {
-  constructor(Title, Description, dueDate, Priority, categoryName) {
+  constructor(Title, Description, dueDate, Priority) {
     this.Title = Title;
     this.Description = Description;
     this.dueDate = dueDate;
@@ -69,7 +70,6 @@ class addTodo {
         taskForm.querySelector("#description").value,
         taskForm.querySelector("#date").value,
         taskForm.querySelector("#priority").value,
-        this.Category,
       );
 
       this.handleDelete();
