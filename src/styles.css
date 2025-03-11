@@ -7,7 +7,6 @@ body {
   grid-template-columns: 1fr 5fr;
   gap: 20px;
 }
-
 .categories {
   background-color: rgb(197, 197, 245);
   border-radius: 8px;

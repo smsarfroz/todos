@@ -14,6 +14,7 @@ class addTodo {
   }
 
   insertTasktoView() {
+    console.log("esoi nwaefp nosd fasefpainsdfs we");
     this.todos = document.querySelector(".todos");
     this.task = document.createElement("div");
     this.task.innerHTML = `

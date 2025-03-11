@@ -2,6 +2,7 @@ import deleteIcon from "./images/delete.svg";
 import editIcon from "./images/edit.svg";
 
 const addProject = function (categoryName) {
+  console.log("sdfhj wuiehfdfksjdhfoi_iktjh£$7gdkjfhgdifujhg 4y erhg");
   const deleteCat = document.createElement("img");
   deleteCat.classList.add("deleteCat");
   deleteCat.src = deleteIcon;
@@ -14,7 +15,9 @@ const addProject = function (categoryName) {
   const newProject = document.createElement("div");
   newProject.classList.add("projectClass");
   newProject.innerHTML = `
-        <div class="categoryNameDiv"><h3>${categoryName}</h3></div>
+        <div class="categoryNameDiv">
+          <h3>${categoryName}</h3>
+        </div>
         <div class="categoryIconsDiv">
             ${editCat.outerHTML}
             ${deleteCat.outerHTML}

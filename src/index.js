@@ -4,7 +4,8 @@ import editIcon from "./images/edit.svg";
 import { addProject } from "./addProject";
 import { addTodo } from "./addTodo";
 import { handleAllTask } from "./handleAllTask";
-import { saveCategoryNamefunction } from "./saveCategoryNameFunction";
+import { saveCategoryNamefunction } from "./saveCategoryNameFunction.js";
+import { quartersInYear } from "date-fns/constants";
 
 let ToDo = [];
 
@@ -33,13 +34,13 @@ const saveButton = document.querySelector(".save");
 let categoryName = "";
 
 saveButton.addEventListener("click", () => {
-  saveCategoryNamefunction();
+  categoryName = saveCategoryNamefunction();
 });
 const categoryFormInput = document.querySelector(".categoryFormInput");
 categoryFormInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
-    saveCategoryNamefunction();
+    categoryName = saveCategoryNamefunction();
   }
 });
 
@@ -99,6 +100,7 @@ if (projects) {
         localStorage.setItem("category", updatedCategoryArrayString);
       }
     } else {
+      console.log("inside click on a category");
       console.log(project);
       console.log(project.className);
 
@@ -106,23 +108,34 @@ if (projects) {
       const todos = document.querySelector(".todos");
       todos.innerHTML = "";
       const todoArrayString = localStorage.getItem("todos");
+      console.log(todoArrayString);
       if (todoArrayString) {
         const todoArray = JSON.parse(todoArrayString);
 
+        console.log("inside check todoArrayString");
+        console.log(todoArray);
         todoArray.forEach((todo) => {
+          console.log(todo);
+          console.log(`todo.Category = ${todo.Category}`);
+          console.log(`project.textContent = ${project.textContent}`);
+          console.log(todo.Category, project.textContent);
           if (todo.Category === project.textContent) {
-            const newTodo = document.createElement("div");
-            newTodo.innerHTML = `
-                            <h3>${todo.Title}</h3>
-                            <div class="dropDescription">
-                            <p>${todo.Description}</p>
-                                <div class="datePriority">
-                                    <p>${todo.dueDate}</p>
-                                    <p>${todo.Priority}</p>
-                                </div>
-                            </div>
-                        `;
-            todos.appendChild(newTodo);
+            console.log(todo);
+            console.log(
+              (todo.Title,
+              todo.Description,
+              todo.dueDate,
+              todo.Priority,
+              todo.Category),
+            );
+            let newTodo = new addTodo(
+              todo.Title,
+              todo.Description,
+              todo.dueDate,
+              todo.Priority,
+              todo.Category,
+            );
+            newTodo.insertTasktoView();
           }
         });
       }
@@ -169,16 +182,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (categoryArrayString) {
     const categoryArray = JSON.parse(categoryArrayString);
     categoryArray.forEach((category) => {
-      const project = document.createElement("div");
-      project.textContent = category;
-      projects.appendChild(project);
+      addProject(category);
     });
   }
   const allTaskButton = document.querySelector(".allTasks");
   allTaskButton.click();
 });
 
-handleAllTask();
+categoryName = handleAllTask();
 
 const addnewTaskButton = document.querySelector(".newTasks");
 
