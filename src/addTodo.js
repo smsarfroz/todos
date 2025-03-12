@@ -60,6 +60,11 @@ class addTodo {
     }
   }
   handleEdit() {
+    taskForm.querySelector("#title").value = this.Title;
+    taskForm.querySelector("#description").value = this.Description;
+    taskForm.querySelector("#date").value = this.dueDate;
+    taskForm.querySelector("#priority").value = this.Priority;
+
     taskForm.showModal();
 
     const submitHandler = (e) => {
