@@ -1,3 +1,5 @@
+import { categoryName } from ".";
+import { addTodo } from "./addTodo";
 const handleClickOnProjectElements = function () {
   const projects = document.querySelector(".projects");
 
