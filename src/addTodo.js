@@ -11,7 +11,7 @@ class addTodo {
     this.Description = Description;
     this.dueDate = dueDate;
     this.Priority = Priority;
-    this.Category = categoryName;
+    this.Category = categoryName.getName;
   }
 
   insertTasktoView() {

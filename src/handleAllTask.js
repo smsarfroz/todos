@@ -1,5 +1,5 @@
 import { addTodo } from "./addTodo";
-import { categoryName } from "./taskDialogue";
+import { categoryName } from ".";
 
 const handleAllTask = function () {
   const allTaskButton = document.querySelector(".allTasks");
@@ -20,7 +20,7 @@ const handleAllTask = function () {
       });
     }
   });
-  return "";
+  categoryName.setName = "";
 };
 
-export { handleAllTask, categoryName };
+export { handleAllTask };
