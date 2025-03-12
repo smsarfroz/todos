@@ -38,8 +38,17 @@ class addTodo {
     this.editIcon = this.task.querySelector(".editTodo");
     this.deleteIcon = this.task.querySelector(".deleteTodo");
 
+    this.dropdownIcon.removeEventListener("click", () => {
+      this.handleDropdown();
+    });
+    this.editIcon.removeEventListener("click", () => {
+      this.handleEdit();
+    });
+    this.deleteIcon.removeEventListener("click", () => {
+      this.handleDelete();
+    });
+
     this.dropdownIcon.addEventListener("click", () => {
-      console.log("drop down clicked");
       this.handleDropdown();
     });
     this.editIcon.addEventListener("click", () => {
@@ -48,6 +57,7 @@ class addTodo {
     this.deleteIcon.addEventListener("click", () => {
       this.handleDelete();
     });
+
     this.todos.appendChild(this.task);
   }
 
@@ -60,6 +70,8 @@ class addTodo {
     }
   }
   handleEdit() {
+    console.log("inside handleEdit function");
+    console.log(this.task);
     taskForm.querySelector("#title").value = this.Title;
     taskForm.querySelector("#description").value = this.Description;
     taskForm.querySelector("#date").value = this.dueDate;
@@ -79,7 +91,7 @@ class addTodo {
 
       this.handleDelete();
 
-      updatedTodo.insertTasktoView();
+      //updatedTodo.insertTasktoView();
 
       const todoArrayString = localStorage.getItem("todos");
       const todoArray = JSON.parse(todoArrayString);
@@ -102,9 +114,11 @@ class addTodo {
     };
 
     const saveTaskButton = document.querySelector(".saveTask");
+
     saveTaskButton.removeEventListener("click", () => {
       submitHandler();
     });
+
     saveTaskButton.addEventListener("click", () => {
       submitHandler();
     });

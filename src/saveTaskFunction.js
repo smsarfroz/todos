@@ -9,12 +9,16 @@ const saveTaskFunction = function () {
   const description = document.querySelector("#description").value;
   const date = document.querySelector("#date").value;
   const priority = document.querySelector("#priority").value;
+  const taskForm = document.querySelector(".taskForm");
 
   console.log("categoryName");
   console.log(categoryName);
   let newTodo = new addTodo(title, description, date, priority);
   newTodo.insertTasktoView();
   ToDo.push(newTodo);
+
+  console.log("Inside saveTaskFunction");
+  console.log(newTodo);
 
   const todoArrayString = localStorage.getItem("todos");
   const todoArray = todoArrayString ? JSON.parse(todoArrayString) : [];
@@ -23,6 +27,7 @@ const saveTaskFunction = function () {
   localStorage.setItem("todos", updatedTodoArrayString);
 
   console.log(ToDo);
+  taskForm.close();
 };
 
 export { saveTaskFunction };
